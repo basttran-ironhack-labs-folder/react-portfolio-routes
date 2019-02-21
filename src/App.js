@@ -6,6 +6,8 @@ import AboutUs from "./components/AboutUs.js";
 import HomePage from "./components/HomePage.js";
 import ProjectList from "./components/ProjectList.js";
 import NotFound from "./components/NotFound.js";
+import ProjectDetails from "./components/ProjectDetails.js";
+import TempCalc from "./components/TempCalc";
 
 class App extends Component {
   render() {
@@ -18,10 +20,13 @@ class App extends Component {
             USe NavLink for cool React navigation WITHOUT refresh
             (NavLinks adds a special "active" class)
              */}
-            <NavLink to="/">Home</NavLink>
+            <NavLink exact to="/">
+              Home
+            </NavLink>
             {/* <a href="/">Home</a> */}
             <NavLink to="/about">About Me</NavLink>
             <NavLink to="/project-list">Projects</NavLink>
+            <NavLink to="/temperature">Temperature Calculator</NavLink>
           </nav>
         </header>
 
@@ -38,12 +43,25 @@ class App extends Component {
 
           <Route path="/about" component={AboutUs} />
 
+          <Route path="/project-list/:projectId" component={ProjectDetails} />
+
           <Route path="/project-list" component={ProjectList} />
+
+          <Route path="/temperature" component={TempCalc} />
 
           <Route component={NotFound} />
         </Switch>
         <footer>
           <p>Made with Haste @ Ironhack</p>
+          <Switch>
+            <Route
+              path="/project"
+              // Use render() to define the route's content directly
+              render={() => {
+                return <p>WARNING: These Projects Are FAKE</p>;
+              }}
+            />
+          </Switch>
         </footer>
       </div>
     );
